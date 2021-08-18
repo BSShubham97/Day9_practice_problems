@@ -11,37 +11,42 @@ public class EmployeeWage {
     static final int empFullTime = 8;
     static final int empPartTime = 4;
 
-    public void isPresent() {
+    public int isPresent() {
         Random random = new Random();
         int attendance = random.nextInt(2);
         if (attendance == 1)
-            System.out.println("Employee PRESENT");
+            return 1;
         else
-            System.out.println("Employee ABSENT");
+            return 0 ;
     }
 
-    public int workTime() {
+    public void workTime() {
         Random random = new Random();
-        int workHours = random.nextInt(9);
-        if (workHours == 0) {
-            System.out.println("Employee Absent ");
-            return 0;
-        } else if (workHours > empPartTime) {
-            System.out.println("Employee is a FULL TIME worker");
-            return workHours;
-        } else {
-            System.out.println("Employee is a PART TIME worker");
-            return workHours;
+        int checkEmployee = isPresent();
+        switch (checkEmployee) {
+            case 0:
+                System.out.println("Employee Absent ");
+                System.out.println("Total Wages: 0");
+                break;
+
+            case 1:
+                int workHours = random.nextInt((8)+1);
+                if (workHours > empPartTime) {
+                    System.out.println("Employee is a FULL TIME worker");
+                    int totalWage = workHours * empWagePerHour;
+                    System.out.println("Total Wages:" + totalWage);
+                } else {
+                    System.out.println("Employee is a PART TIME worker");
+                    int totalWage = workHours * empWagePerHour;
+                    System.out.println("Total Wages:" + totalWage);
+                }
+                break;
         }
-    }
 
-    public void giveTotalWage(int Hours) {
-        int totalWage = Hours * empWagePerHour;
-        System.out.println("Total Wage: " + totalWage);
-    }
 
+    }
     public static void main(String[] args) {
         EmployeeWage employeeWage = new EmployeeWage();
-        employeeWage.giveTotalWage(employeeWage.workTime());
+        employeeWage.workTime();
     }
 }
