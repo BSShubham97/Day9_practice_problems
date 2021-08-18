@@ -8,7 +8,8 @@ import java.util.Random;
 
 public class EmployeeWage {
     static final int empWagePerHour = 20;
-    static final int empFulldayHour = 8;
+    static final int empFullTime = 8;
+    static final int empPartTime = 4;
 
     public void isPresent() {
         Random random = new Random();
@@ -19,13 +20,28 @@ public class EmployeeWage {
             System.out.println("Employee ABSENT");
     }
 
-    public int giveTotalWage() {
-        return empFulldayHour * empWagePerHour;
+    public int workTime() {
+        Random random = new Random();
+        int workHours = random.nextInt(9);
+        if (workHours == 0) {
+            System.out.println("Employee Absent ");
+            return 0;
+        } else if (workHours > empPartTime) {
+            System.out.println("Employee is a FULL TIME worker");
+            return workHours;
+        } else {
+            System.out.println("Employee is a PART TIME worker");
+            return workHours;
+        }
+    }
 
+    public void giveTotalWage(int Hours) {
+        int totalWage = Hours * empWagePerHour;
+        System.out.println("Total Wage: " + totalWage);
     }
 
     public static void main(String[] args) {
         EmployeeWage employeeWage = new EmployeeWage();
-        System.out.println("Total Wages :" + employeeWage.giveTotalWage());
+        employeeWage.giveTotalWage(employeeWage.workTime());
     }
 }
