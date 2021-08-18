@@ -10,43 +10,24 @@ public class EmployeeWage {
     static final int empWagePerHour = 20;
     static final int empFullTime = 8;
     static final int empPartTime = 4;
+    static final int monthDays=20;
 
-    public int isPresent() {
+
+    public int getTotalMonthWage() {
         Random random = new Random();
-        int attendance = random.nextInt(2);
-        if (attendance == 1)
-            return 1;
-        else
-            return 0 ;
-    }
+        int totalWorkHrs = 0;
 
-    public void workTime() {
-        Random random = new Random();
-        int checkEmployee = isPresent();
-        switch (checkEmployee) {
-            case 0:
-                System.out.println("Employee Absent ");
-                System.out.println("Total Wages: 0");
-                break;
-
-            case 1:
-                int workHours = random.nextInt((8)+1);
-                if (workHours > empPartTime) {
-                    System.out.println("Employee is a FULL TIME worker");
-                    int totalWage = workHours * empWagePerHour;
-                    System.out.println("Total Wages:" + totalWage);
-                } else {
-                    System.out.println("Employee is a PART TIME worker");
-                    int totalWage = workHours * empWagePerHour;
-                    System.out.println("Total Wages:" + totalWage);
-                }
-                break;
+        int i ;
+        for(i=1;i<=monthDays;i++) {
+            int workDoneHrs = random.nextInt((8) + 1);
+            totalWorkHrs = totalWorkHrs + workDoneHrs;
         }
-
+        int monthWages= totalWorkHrs * empWagePerHour;
+        return monthWages;
 
     }
     public static void main(String[] args) {
         EmployeeWage employeeWage = new EmployeeWage();
-        employeeWage.workTime();
+        System.out.println("Total Wages of a month: "+employeeWage.getTotalMonthWage());
     }
 }
