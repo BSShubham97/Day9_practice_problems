@@ -7,34 +7,42 @@ import java.util.Random;
  */
 
 public class EmployeeWage {
-    static final int empWagePerHour = 20;
-    static final int empFullTime = 8;
-    static final int empPartTime = 4;
-    static final int monthDays = 20;
-    static final int maxWorkHours = 100;
+    public static final int FULL_TIME = 1;
+    public static final int PART_TIME = 2;
+    public static final int EMP_RATE_PER_HOUR = 20;
+    public static final int NUM_OF_WORKING_DAYS = 20;
+    public static final int MAX_HRS_IN_A_MONTH = 100;
 
+    public static int computeEmpWage() {
+        int empHrs = 0;
+        int totalEmpHrs = 0;
+        int totalWorkingDays = 0;
 
-    public void getLimitMonthWage() {
-        Random random = new Random();
-        int totalWorkHrs = 0;
-
-        int i;
-
-        for (i = 1; i <= monthDays; i++)    {
-            if(totalWorkHrs <= maxWorkHours) {
-                int workDoneHrs = random.nextInt((8) )+ 1;
-                System.out.println("Work done on day "+i+" is "+workDoneHrs);
-                totalWorkHrs = totalWorkHrs + workDoneHrs;
-                System.out.println("Total Work Hours till day "+i+" is "+totalWorkHrs);
-
+        while (totalEmpHrs <= MAX_HRS_IN_A_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+            totalWorkingDays++;
+            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+            switch (empCheck) {
+                case PART_TIME:
+                    empHrs = 4;
+                    break;
+                case FULL_TIME:
+                    empHrs = 8;
+                    break;
+                default:
+                    empHrs = 0;
             }
+            totalEmpHrs += empHrs;
+            System.out.println("DAY: " + totalWorkingDays + " Emp Hrs: " + empHrs);
         }
-        int monthWages = totalWorkHrs * empWagePerHour;
-        System.out.println("Total wages: "+monthWages);
+        int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
+        System.out.println("Total Emp Wage: " + totalEmpWage);
+        return totalEmpWage;
     }
 
     public static void main(String[] args) {
-        EmployeeWage employeeWage = new EmployeeWage();
-        employeeWage.getLimitMonthWage();
+        computeEmpWage();
     }
+
 }
+
+
